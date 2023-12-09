@@ -50,6 +50,7 @@ vector_t also_bad_vector_new() {
     return v;
 }
 
+
 /* Create a new vector with a size (length) of 1
    and set its single component to zero... the
    RIGHT WAY */
@@ -121,7 +122,14 @@ void vector_set(vector_t *v, size_t loc, int value) {
     {
         int old_size = v->size;
         v->size = loc + 1;
-        v->data = realloc(v->data, sizeof(int) * v->size);
+        v->data = (int *)realloc(v->data, sizeof(int) * v->size);
+
+        if (NULL == v->data)
+        {
+            free(v);
+            allocation_failed();
+        }
+
         for(old_size; old_size < v->size; ++old_size)
         {
             v->data[old_size] = 0;

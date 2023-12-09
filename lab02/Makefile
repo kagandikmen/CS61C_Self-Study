@@ -49,5 +49,10 @@ clean:
 vector.c: vector.h
 vector-test.c: vector.h
 
-vector-test: vector.c vector-test.c
+vector-test: vector.c vector-test.c vector.h
 	$(CC) $(CFLAGS) -g -o vector-test vector.c vector-test.c
+
+spec:
+	make clean
+	make vector-test
+	make vector-memcheck
