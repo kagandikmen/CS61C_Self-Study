@@ -48,3 +48,6 @@ clean:
 
 vector.c: vector.h
 vector-test.c: vector.h
+
+vector-test: vector.c vector-test.c
+	$(CC) $(CFLAGS) -g -o vector-test vector.c vector-test.c
