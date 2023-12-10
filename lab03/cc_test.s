@@ -114,7 +114,7 @@ inc_arr:
     #
     # FIXME What other registers need to be saved?
     #
-    # ANSWER: s0 and s1 must also be saved
+    # ANSWER: s0 and s1 must also be saved by the callee
     #       for they are preserved across function calls
     #
     addi sp, sp, -12
@@ -136,7 +136,7 @@ inc_arr_loop:
     # Also ask yourself this: why don't we need to preserve t1?
     #
     # ANSWER: t1 is a preserved register
-    #       its value should be saved on stack by the caller before calling the callee
+    #       its value should be saved on stack by the callee before going back to the caller
     addi sp, sp, -4
     sw t1, 0(sp)
     #
@@ -164,8 +164,12 @@ inc_arr_end:
 # You should fix the bug anyway by filling in the prologue and epilogue
 # as appropriate.
 #
-# KD: I fixed the bug, but I honestly do not know
-#   why this isn't caught by CC Checker
+# ANSWER: s0 is preserved across function calls, must be saved on
+#       stack by the callee before going back to the caller function
+#       CC Checker of Venus cannot catch this one, because it looks for
+#       bugs in only such functions, that are exported with the .globl
+#       directive (see line 1 of this file and explanation of lab 3 exercise 4)
+#       (https://inst.eecs.berkeley.edu/~cs61c/fa20/labs/lab03/#exercise-4-calling-convention-checker)
 #
 helper_fn:
     # BEGIN PROLOGUE
