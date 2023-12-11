@@ -78,6 +78,13 @@ main:
 f:
     # YOUR CODE GOES HERE!
 
+    addi a0, a0, 3      # a0 holds which order the input comes in the sequence
+    slli a0, a0, 2      # multiplication with 4 to word-address
+                        # the elements in the sequence
+    add a0, a0, a1      # a0 holds the address in which the element resides in
+                        # the memory
+    lw a0, 0(a0)        # loading the value at the address from the memory (on a0 itself
+                        # to minimise register footprint)
     jr ra               # Always remember to jr ra after your function!
 
 print_int:
