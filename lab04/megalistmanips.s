@@ -65,21 +65,48 @@ map:
     # also keep in mind that we should not make ANY assumption on which registers
     # are modified by the callees, even when we know the content inside the functions 
     # we call. this is to enforce the abstraction barrier of calling convention.
-mapLoop:
-    add t1, s0, x0      # load the address of the array of current node into t1
-    lw t2, 4(s0)        # load the size of the node's array into t2
 
-    add t1, t1, t0      # offset the array address by the count
+    # ADDED (SEE ERROR Nr 1):
+    lw t1, 0(s0)        # t1 holds now the first element of the current node (the array pointer)
+    lw t2, 4(s0)        # t2 holds now the second element of the current node (size of the array)
+    addi t1, t1, -4     # we have to increment t1 each time by 4 in mapLoop, so here we are
+                        # compensating for the first element of the array (see line 81)
+mapLoop:
+    # ERROR Nr 1:
+    # add t1, s0, x0      # load the address of the array of current node into t1
+    # lw t2, 4(s0)        # load the size of the node's array into t2
+
+    # ERROR Nr 2:
+    # add t1, t1, t0
+    addi t1, t1, 4      # offset the array address by the count
     lw a0, 0(t1)        # load the value at that address into a0
 
+    # ERROR Nr 3:
+    # the next four lines (and the four lines after the jalr instruction) were added
+    addi sp, sp, -12
+    sw t0, 8(sp)
+    sw t1, 4(sp)
+    sw t2, 0(sp)
+
     jalr s1             # call the function on that value.
+
+    # ERROR Nr 3:
+    lw t0, 8(sp)
+    lw t1, 4(sp)
+    lw t2, 0(sp)
+    addi sp, sp, 12
 
     sw a0, 0(t1)        # store the returned value back into the array
     addi t0, t0, 1      # increment the count
     bne t0, t2, mapLoop # repeat if we haven't reached the array size yet
 
+    # ERROR Nr 4:
+    # la a0, 8(s0)
     lw a0, 8(s0)        # load the address of the next node into a0
-    lw a1, 0(s1)        # put the address of the function back into a1 to prepare for the recursion
+
+    # ERROR Nr 5:
+    # lw a1, 0(s1)
+    mv a1, s1           # put the address of the function back into a1 to prepare for the recursion
 
     jal  map            # recurse
 done:

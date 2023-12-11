@@ -3,15 +3,16 @@
     (before it returns with jr ra), and make sure that the lines do what the 
     comments say. Some hints:
         Why do we need to save stuff on the stack before we call jal?
-            We call a function called mapLoop inside of map. And mapLoop uses the saved
-            registers s0 and s1. It also uses ra to be able to return to the point
-            where it was called. ra, s0, and s1 are all preserved across
-            function calles, so they have to be saved by the caller before calling
-            another function. This is the convention.
+            We call the function addressed by s1 inside of mapLoop. And we do not know
+            which registers this callee function manipulates. We can expected it to restore
+            the preserved registers at the end, but cannot be sure that we will have the same
+            values in the other registers at the end. Values in registers that are not preserved across
+            function calls have to be saved by the caller before going into the callee function.
+            This is the convention.
         What’s the difference between add t0, s0, x0 and lw t0, 0(s0)?
             "add t0, s0, x0" loads the value inside of s0 into the register t0,
             whereas "lw t0, 0(s0)" goes to the memory address pointed by the s0, gets
-            the value inside and places it into t0. "add t0, s0, x0" is just copying the 
+            the value inside and places it into the register t0. "add t0, s0, x0" is just copying the 
             contents of s0 inside t0, while "lw t0, 0(s0)" is making a round trip to the 
             memory address pointed by s0.
         Pay attention to the types of attributes in a struct node.
@@ -26,14 +27,18 @@ map implementation only uses the s0 and s1 registers, so we’ll require that yo
 
 3. Make an ordered list of each of the five mistakes, and the corrections you made to fix them.
     1. line 69 - the address of the array resides in the memory, it has to be loaded from the
-        memory to a register
+        memory to a register.
         this might be confusing: s0 points at the first element in the first node, which is the
         array pointer of the first node. but we do not want to only access the pointer to the
         array, we want to access to the array itself. So, we read the word pointed by s0 to get
         the pointer (address) to the array: s0 -> array pointer -> actual array
     2. line 72, 73 - the code is not word accessing, it is byte addressing, which we of course
         don’t want. Offset has to be a multitude of 4.
-    3. line 81 - load word instead of load address. 8(s0) is the beginning byte of a word in the 
+    3. line 75 - t0, t1, and t2 should be saved into the stack before calling another function.
+        these are all temporary registers, they are NOT preserved across function calls (it is
+        not guaranteed that their value will stay the same after the function call, their value
+        has to be saved by the caller before calling the callee)   
+    4. line 81 - load word instead of load address. 8(s0) is the beginning byte of a word in the 
         memory that we want to have access to
-    4. line 82 - we actually never played with the value inside a1, no need to restore it
-    5.
+    5. line 82 - we want a1 to have the address to the function, not the value inside the first
+        byte of the function in the memory
