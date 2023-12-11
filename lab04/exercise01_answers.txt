@@ -31,9 +31,9 @@ map implementation only uses the s0 and s1 registers, so we’ll require that yo
         array pointer of the first node. but we do not want to only access the pointer to the
         array, we want to access to the array itself. So, we read the word pointed by s0 to get
         the pointer (address) to the array: s0 -> array pointer -> actual array
-    2. line 73, 74 - the code is not word accessing, it is byte addressing, which we of course
+    2. line 72, 73 - the code is not word accessing, it is byte addressing, which we of course
         don’t want. Offset has to be a multitude of 4.
-    3. line 82 - load word instead of load address. 8(s0) is the beginning byte of a word in the 
+    3. line 81 - load word instead of load address. 8(s0) is the beginning byte of a word in the 
         memory that we want to have access to
-    4. line 83 - we actually never played with the value inside a1, no need to restore it
+    4. line 82 - we actually never played with the value inside a1, no need to restore it
     5.
