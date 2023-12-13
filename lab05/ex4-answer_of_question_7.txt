@@ -1,0 +1,11 @@
+7. Answer the following question:
+
+If we decide to take the input and interpret it as a 2’s Complement number, 
+what inputs will produce Out1 = 1? Hint: What do the first and last bits of a 2’s 
+Complement number being 1 tell you about the number?
+
+ANSWER:
+
+That the first and the last bits of a Two's Complement number are both 1 means
+that it is a negative odd integer. Negative because its MSB is 1, and odd because
+its LSB is 1.
