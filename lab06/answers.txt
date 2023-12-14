@@ -1,0 +1,23 @@
+-----EXERCISE 1-----
+
+minimum allowable clock time = c2q + crucial path + setup
+                             = 10 ns + (45 ns + 60 ns) + 10 ns
+                             = 125 ns
+
+maximum allowable clock rate = 1 / (125 ns) 
+                             = 8 MHz
+
+
+-----EXERCISE 2-----
+
+minimum allowable clock time = c2q + crucial path + setup
+                             = 10 ns + 60 ns + 10 ns
+                             = 80 ns
+
+maximum allowable clock rate = 1 / (80 ns) 
+                             = 12.5 MHz
+
+Bubbles are unnecessary here, because we don't use the result of
+the addition in the multiplication. All of the numbers we use
+to multiply are already ready, we don't need a value that will
+be changed by an instruction still in process.
