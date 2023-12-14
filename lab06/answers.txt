@@ -1,6 +1,6 @@
 -----EXERCISE 1-----
 
-minimum allowable clock time = c2q + crucial path + setup
+minimum allowable clock time = c2q + critical path + setup
                              = 10 ns + (45 ns + 60 ns) + 10 ns
                              = 125 ns
 
@@ -10,7 +10,7 @@ maximum allowable clock rate = 1 / (125 ns)
 
 -----EXERCISE 2-----
 
-minimum allowable clock time = c2q + crucial path + setup
+minimum allowable clock time = c2q + critical path + setup
                              = 10 ns + 60 ns + 10 ns
                              = 80 ns
 
