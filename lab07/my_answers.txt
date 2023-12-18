@@ -1,0 +1,98 @@
+Since I am not a student of UC Berkeley, I am not able
+to use their checkout system to see if my answers are correct.
+But these are my answers for the three exercises of lab 7:
+
+---EXERCISE 1----------------------------------------------------------
+
+Scenario 1
+    1. Hit rate is 0, because cache size = step size * sizeof(int)
+    2. 0
+    3. step size, 1 (If we make step size 1, our steps are always 4 bytes, which guarantees 
+        a hit once after we load a block)
+
+Scenario 2
+    1. 64 (array size in bytes / step size in bytes) being (256 / (2*4))
+    2. MHHH
+    3. 1
+
+Scenario 3
+    1. L1 0.5, L2 0, Overall 0.5 ((#hits of L1 + #hits of L2)/#accesses overall) = ((16 + 0)/32)
+    2. 32, 16
+    3. 16
+    4. increasing the rep count
+    5. +, -, +, - (if iterated more than once through the array, otherwise: =, =, +, =)
+
+-------------------------------------------------------------
+
+Checkoff Question 1: Rep count doesn't affect the hit rate. It just increases how many accesses we do.
+                    The rep count doesn't matter if we are destined to get misses.
+Checkoff Question 2: Option can be changed too. In option 1, we read first and write to the same block second.
+                    We will have 50% hit rate. (write-allocate cache)
+Checkoff Question 3: A block gets loaded with 16 bytes of data (first miss), and then we write to this
+                    block (hit), and then we go 8 bytes further, we read the data (hit), and lastly
+                    write to the block (hit). When we go 8 bytes ahead, we are no more in the same block,
+                    and therefore it is a miss again ...
+Checkoff Question 4: The cache is 16 * 16 = 256 bytes big. After the first iteration through the array, 
+                    we have the whole array in the cache. We don't have to go to the memory anymore for
+                    the following iterations. The hit rate skyrockets.
+Checkoff Question 5: We should try to access elements of the array at a time and apply all of the functions to that
+                     element so we can be completely done with it before moving on, thereby keeping that element 
+                     hot in the cache and not having to circle back to it later on.
+Checkoff Question 6: the first iteration through the array fills up the cache L2 (it was cold at the beginning), 
+                    but for the following iterations all of the data is already there ready to be used. Once the L2
+                    is filled through the first iteration, no trip more to the memory is needed
+
+
+---EXERCISE 2----------------------------------------------------------
+
+1. (the best:) jki, (the second best:) kji
+2. (the worst:) ikj, (the second worst:) kij
+
+--- lines below are ignored by the AG ---
+
+Checkoff Question 1, 2, and 3: in the instruction C[i+j*n] += A[i+k*n]*B[k+j*n], i is used for addition two times, 
+                                k for addition one time, multiplication one time and finally j is used for
+                                multiplication two times. Because multiplication takes much more time than addition,
+                                it would be very handy to be able to store the result of the multiplication in the 
+                                cache and use it over and over (compiler optimisation does exactly that). So the best 
+                                scenario is to do all the addition finally, which makes it ideal to nest using the 
+                                order jki.
+
+
+---EXERCISE 3----------------------------------------------------------
+
+Part 1
+    blocksize = 20, n = 100:    Testing naive transpose: 0.008 milliseconds
+                                Testing transpose with blocking: 0.01 milliseconds
+    blocksize = 20, n = 1000:   Testing naive transpose: 3.171 milliseconds
+                                Testing transpose with blocking: 2.012 milliseconds
+    blocksize = 20, n = 2000:   Testing naive transpose: 11.901 milliseconds
+                                Testing transpose with blocking: 8.479 milliseconds
+    blocksize = 20, n = 5000:   Testing naive transpose: 184.415 milliseconds
+                                Testing transpose with blocking: 59.256 milliseconds
+    blocksize = 20, n = 10000:  Testing naive transpose: 2379.41 milliseconds
+                                Testing transpose with blocking: 280.959 milliseconds
+
+    Checkoff Question 1: somewhere between n = 100 and n = 1000
+    Checkoff Question 2: For the cache blocked version to be able to use its "cache advantage",
+                         there needs to be some room to iterate using some multiplication
+                         results over and over. (some room to use locality)
+
+Part 2
+    blocksize = 50, n = 10000:      Testing naive transpose: 2237.86 milliseconds
+                                    Testing transpose with blocking: 270.624 milliseconds
+    blocksize = 100, n = 10000:     Testing naive transpose: 1087.65 milliseconds
+                                    Testing transpose with blocking: 211.027 milliseconds
+    blocksize = 500, n = 10000:     Testing naive transpose: 1059.22 milliseconds
+                                    Testing transpose with blocking: 308.437 milliseconds
+    blocksize = 1000, n = 10000:    Testing naive transpose: 1046.97 milliseconds
+                                    Testing transpose with blocking: 309.925 milliseconds
+    blocksize = 5000, n = 10000:    Testing naive transpose: 1070.62 milliseconds
+                                    Testing transpose with blocking: 862.269 milliseconds
+
+    Checkoff Question 3: At the beginning we gain performance by increasing the blocksize, since
+                        this reduces how many loops the program goes in. (With a small blocksize, 
+                        the amount of going in and out of for-loops increases drastically.) But this
+                        changes after some time (somewhere between 100 and 500 as blocksize), because
+                        the code gets closer and  closer to the naive transposition at that point losing
+                        of its "cache advantage" caused by locality. 
