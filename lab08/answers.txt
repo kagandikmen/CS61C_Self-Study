@@ -1,19 +1,25 @@
 Exercise 1:
-    1.
-    2.
-    3.
+    1. 32
+    2. 2, 8, 0, 8
+    3. no, no
 
 Exercise 2:
-    1.
+    1. 00, 20, 60, 80, A0, C0, E0, 00, 20
 
 Exercise 3:
-    1.
+    1. physical memory size
 
 --- lines below are ignored by the AG ---
 
 Exercise 1 Checkoff Questions:
-    1.
-    2.
+    1. We go to the TLB, TLB doesn't have any entry (TLB miss), we go to the page memory,
+        page table is in its unmodified state, valid bit for the page is 0, so we have to go to
+        the disk and load the corresponding page. After we load the page in the memory, we have
+        their physical address, depending on which page on the memory we have chosen to load on.
+    2. Because there are 8 pages in the virtual memory. One needs 3 bits to address them.
+        However, the memory has 4 pages and therefore only 2 bits are needed for addressing.
 
 Exercise 4 Checkoff Question:
-    1.
+    1. The percentage is higher, because the TLB is zeroed out at each context switch. Each process
+        fills out the TLB for (around) 4 memory accesses, but right after that, a context switch happens
+        and the next process begins with a zeroed out TLB.
