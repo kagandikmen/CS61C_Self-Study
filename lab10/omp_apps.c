@@ -40,6 +40,10 @@ void v_add_optimized_adjacent(double* x, double* y, double* z) {
     int id = omp_get_thread_num();
     int num = omp_get_num_threads();
     
+    // Causes false sharing!!!
+
+    // Different threads can modify elements located in the same memory block 
+    // at the same time, which causes false sharing issues!!!
     for(int i=id; i < ARRAY_SIZE; i+=num)
     {
       z[i] = x[i] + y[i];
