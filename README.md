@@ -1,6 +1,7 @@
 
 # UC Berkeley CS61C - Lab Assignments of the Class of Fall 2020
 
+This is the repository for my self-study process of CS61C offered by UC Berkeley. For my answers, see branch "sandbox".
 The course webpage can be found [here](https://inst.eecs.berkeley.edu/~cs61c/fa20/). 
 
 ## Progress
