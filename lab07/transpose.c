@@ -18,8 +18,4 @@ void transpose_blocking(int n, int blocksize, int *dst, int *src) {
             for (int i = 0; i < blocksize && y + i < n; i++)
                 for (int j = 0; j < blocksize && x + j < n; j++)
                     dst[(y + i) + (x + j) * n] = src[(x + j) + (y + i) * n];
-    
-    // Thanks to Fuyukiri for this piece of code, see his/her answers for the labs:
-    // https://github.com/Fuyukiri/CS61C
-
 }
