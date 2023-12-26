@@ -5,10 +5,8 @@ The course webpage can be found [here](https://inst.eecs.berkeley.edu/~cs61c/fa2
 
 ## Progress
 
-### Labs
-
 |Nr.| Name| Status|
-| ------ | ----- | ----- |
+| :- | :- | :-: |
 |0|Intro and Setup|complete|
 |1|C and CGDB|complete|
 |2|Advanced C|complete|
@@ -24,8 +22,7 @@ The course webpage can be found [here](https://inst.eecs.berkeley.edu/~cs61c/fa2
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
+Pull requests, suggestions, bug fixes etc. are all welcome.
 
 ## License
 
