@@ -1,24 +1,24 @@
 
-# UC Berkeley CS61C - Lab Assignments of the Class of Fall 2020
+# UC Berkeley CS61C (Great Ideas in Computer Architecture, aka Machine Structures) Class of Fall 2020 - Lab Assignments
 
-This is the repository for my self-study process of CS61C offered by UC Berkeley. For my answers, see branch "sandbox".
+This is the repository I used while self-studying CS61C. For my answers, see branch "sandbox".
 The course webpage can be found [here](https://inst.eecs.berkeley.edu/~cs61c/fa20/). 
 
 ## Progress
 
 |Nr.| Name| Status|
 | :- | :- | :-: |
-|0|Intro and Setup|complete|
-|1|C and CGDB|complete|
-|2|Advanced C|complete|
-|3|RISC-V Assembly|complete|
-|4|RISC-V Functions, Pointers|complete|
-|5|Logisim|complete|
-|6|Pipelining and CPU|complete|
-|7|Caches|complete|
-|8|OS, I/O, DMA, Disks, Networking & Virtual Memory|complete|
-|9|SIMD Instructions|complete|
-|10|Thread Level Parallelism|incomplete|
+|0|Intro and Setup|completed|
+|1|C and CGDB|completed|
+|2|Advanced C|completed|
+|3|RISC-V Assembly|completed|
+|4|RISC-V Functions, Pointers|completed|
+|5|Logisim|completed|
+|6|Pipelining and CPU|completed|
+|7|Caches|completed|
+|8|OS, I/O, DMA, Disks, Networking & Virtual Memory|completed|
+|9|SIMD Instructions|completed|
+|10|Thread Level Parallelism|in progress|
 |11|Spark / Dependability|untouched|
 
 ## Contributing
